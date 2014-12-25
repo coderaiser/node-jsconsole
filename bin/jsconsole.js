@@ -34,7 +34,7 @@
             http        = require('http'),
             
             express     = require('express'),
-            minify      = require('minify'),
+            mollify     = require('mollify'),
             
             app         = express(),
             server      = http.createServer(app),
@@ -53,7 +53,7 @@
                 prompt: ' ',
                 online: false
             }))
-            .use(minify({
+            .use(mollify({
                 dir: DIR
             }))
             .use(express.static(DIR))
