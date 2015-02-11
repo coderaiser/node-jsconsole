@@ -51,7 +51,8 @@
                 server: server,
                 execute: execute,
                 prompt: ' ',
-                online: false
+                online: false,
+                minify: false
             }))
             .use(mollify({
                 dir: DIR
@@ -96,5 +97,7 @@
             socket.emit('err', error.message + '\n');
         else
             socket.emit('data', context.result + '\n');
+        
+        socket.emit('prompt', '');
     }
 })();
