@@ -17,9 +17,9 @@
   ],
   "dependencies": {
     "console-io": "~2.2.0",
-    "execon": "~1.0.1",
     "express": "~4.12.0",
-    "mollify": "~1.0.4"
+    "mollify": "~1.0.4",
+    "try-catch": "~1.0.0"
   },
   "devDependencies": {},
   "license": "MIT"

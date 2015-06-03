@@ -5,7 +5,7 @@
     
     var argv        = process.argv,
         path        = require('path'),
-        exec        = require('execon'),
+        tryCatch    = require('try-catch'),
         vm          = require('vm'),
         
         DIR         = __dirname + '/../',
@@ -89,7 +89,7 @@
         
         context = Clients[Num].context;
         
-        error   = exec.try(function() {
+        error   = tryCatch(function() {
             vm.runInContext('result = eval("' + code + '")', context);
         });
         
