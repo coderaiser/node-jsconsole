@@ -16,7 +16,7 @@
     "web"
   ],
   "dependencies": {
-    "console-io": "~2.5.0",
+    "console-io": "~2.6.1",
     "express": "~4.13.3",
     "mollify": "~1.0.4",
     "try-catch": "~1.0.0"
