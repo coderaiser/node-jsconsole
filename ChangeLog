@@ -1,3 +1,10 @@
+2016.03.17, v1.0.11
+
+feature:
+- (package) ~ -> ^
+- (package) v2.7.2
+
+
 2016.02.01, v1.0.10
 
 feature:
