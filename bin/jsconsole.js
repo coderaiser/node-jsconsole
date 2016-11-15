@@ -29,7 +29,7 @@ default:
 }
 
 function start() {
-    var webconsole  = require('console-io'),
+    var webconsole  = require('console-io/legacy'),
         http        = require('http'),
         
         express     = require('express'),
@@ -46,10 +46,15 @@ function start() {
         ip          =   process.env.IP              ||  /* c9           */
                         '0.0.0.0';
     
+    webconsole.listen(null, {
+        server: server,
+        execute: execute,
+        prompt: ' ',
+        online: false,
+        minify: false
+    });
+    
     app .use(webconsole({
-            server: server,
-            execute: execute,
-            prompt: ' ',
             online: false,
             minify: false
         }))
