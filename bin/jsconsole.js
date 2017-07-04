@@ -81,7 +81,8 @@ function version() {
     console.log('v' + pack.version);
 }
 
-function execute(socket, code) {
+function execute(socket, command) {
+    var code = command.cmd;
     var error, context;
     
     if (!Clients[Num])
