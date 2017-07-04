@@ -33,7 +33,6 @@ function start() {
         http        = require('http'),
         
         express     = require('express'),
-        mollify     = require('mollify'),
         
         app         = express(),
         server      = http.createServer(app),
