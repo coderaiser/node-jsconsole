@@ -2,18 +2,18 @@
 
 'use strict';
 
-var argv        = process.argv,
-    path        = require('path'),
-    tryCatch    = require('try-catch'),
-    vm          = require('vm'),
-    
-    DIR         = __dirname + '/../',
-    Index       = path.join(DIR + 'html/index.html'),
-    
-    Clients     = [],
-    Num         = 0,
-    
-    argvLast    = argv.slice().pop();
+const argv = process.argv;
+const path = require('path');
+const tryCatch = require('try-catch');
+const vm = require('vm');
+
+const DIR = __dirname + '/../';
+const Index = path.join(DIR + 'html/index.html');
+
+const Clients = [];
+let Num = 0;
+
+const argvLast    = argv.slice().pop();
 
 switch (argvLast) {
 case '-v':
@@ -29,21 +29,20 @@ default:
 }
 
 function start() {
-    var webconsole  = require('console-io/legacy'),
-        http        = require('http'),
-        
-        express     = require('express'),
-        
-        app         = express(),
-        server      = http.createServer(app),
-        
-        port        =   process.env.PORT            ||  /* c9           */
-                        process.env.app_port        ||  /* nodester     */
-                        process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
-                        1337,
-        
-        ip          =   process.env.IP              ||  /* c9           */
-                        '0.0.0.0';
+    const webconsole = require('console-io/legacy');
+    const http = require('http');
+    
+    const express = require('express');
+    const app = express();
+    const server = http.createServer(app);
+    
+    const port =    process.env.PORT            ||  /* c9           */
+                    process.env.app_port        ||  /* nodester     */
+                    process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
+                    1337;
+    
+    const ip =  process.env.IP ||  /* c9           */
+                '0.0.0.0';
     
     webconsole.listen(null, {
         server: server,
@@ -55,17 +54,16 @@ function start() {
     app .use(webconsole({
             online: false,
         }))
-        .use(mollify({
-            dir: DIR
-        }))
         .use(express.static(DIR))
         
-        .get('/', function (req, res) {
-            res.sendFile(Index, function(error) {
-                if (error)
-                     res
-                        .status(error.status)
-                        .end();
+        .get('/', (req, res) => {
+            res.sendFile(Index, (error) => {
+                if (!error)
+                    return;
+                 
+                 res
+                    .status(error.status)
+                    .end();
             });
         });
         
@@ -75,23 +73,22 @@ function start() {
 }
 
 function version() {
-    var pack = require('../package.json');
+    const pack = require('../package.json');
     
     console.log('v' + pack.version);
 }
 
 function execute(socket, command) {
-    var code = command.cmd;
-    var error, context;
+    const code = command.cmd;
     
     if (!Clients[Num])
         Clients[Num] = {
             context : vm.createContext()
         };
     
-    context = Clients[Num].context;
+    const context = Clients[Num].context;
     
-    error   = tryCatch(function() {
+    const error = tryCatch(() => {
         vm.runInContext('result = eval("' + code + '")', context);
     });
     
