@@ -51,12 +51,10 @@ function start() {
         execute: execute,
         prompt: ' ',
         online: false,
-        minify: false
     });
     
     app .use(webconsole({
             online: false,
-            minify: false
         }))
         .use(mollify({
             dir: DIR
