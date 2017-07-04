@@ -10,10 +10,10 @@ const vm = require('vm');
 const DIR = __dirname + '/../';
 const Index = path.join(DIR + 'html/index.html');
 
-const Clients = [];
+const Clients = new Map();
 let Num = 0;
 
-const argvLast    = argv.slice().pop();
+const argvLast = argv.slice().pop();
 
 switch (argvLast) {
 case '-v':
@@ -45,8 +45,8 @@ function start() {
                 '0.0.0.0';
     
     webconsole.listen(null, {
-        server: server,
-        execute: execute,
+        server,
+        execute,
         prompt: ' ',
         online: false,
     });
@@ -81,13 +81,10 @@ function version() {
 function execute(socket, command) {
     const code = command.cmd;
     
-    if (!Clients[Num])
-        Clients[Num] = {
-            context : vm.createContext()
-        };
+    if (!Clients.get(socket))
+        Clients.set(socket, vm.createContext());
     
-    const context = Clients[Num].context;
-    
+    const context = Clients.get(socket);
     const error = tryCatch(() => {
         vm.runInContext('result = eval("' + code + '")', context);
     });
