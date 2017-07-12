@@ -29,7 +29,7 @@ default:
 }
 
 function start() {
-    const webconsole = require('console-io/legacy');
+    const webconsole = require('console-io');
     const http = require('http');
     
     const express = require('express');
