@@ -85,9 +85,8 @@ function execute(socket, command) {
         Clients.set(socket, vm.createContext());
     
     const context = Clients.get(socket);
-    const error = tryCatch(() => {
-        vm.runInContext('result = eval("' + code + '")', context);
-    });
+    const result = tryCatch(vm.runInContext, 'result = eval("' + code + '")', context);
+    const error = result[0];
     
     if (error)
         socket.emit('err', error.message + '\n');

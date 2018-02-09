@@ -18,7 +18,7 @@
   "dependencies": {
     "console-io": "^5.0.0",
     "express": "^4.13.3",
-    "try-catch": "^1.0.0"
+    "try-catch": "^2.0.0"
   },
   "devDependencies": {},
   "license": "MIT",
