@@ -16,7 +16,7 @@
     "web"
   ],
   "dependencies": {
-    "console-io": "^6.0.1",
+    "console-io": "^7.0.2",
     "express": "^4.13.3",
     "try-catch": "^2.0.0"
   },
